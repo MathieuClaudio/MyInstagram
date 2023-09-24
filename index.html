@@ -13,8 +13,8 @@
 <body>
     <header>
         <h1 class="brand">MyInstagram</h1>
-        <span class="material-symbols-outlined">mark_unread_chat_alt</span>
-        <span class="material-symbols-outlined">favorite</span>
+        <span class="material-symbols-outlined" id="iconComment">mark_unread_chat_alt</span>
+        <span class="material-symbols-outlined" id="iconFavorite">favorite</span>
     </header>
     <main>
         <div class="stories-container">
@@ -83,7 +83,10 @@
         <!-- http://via.placeholder.com/400x600 para sin imagen-->
         <section class="post">
             <img src="https://picsum.photos/400/600" alt="Imagen 1">
-            <p>Descripción de la imagen del post 1.</p>
+            <span class="material-symbols-outlined">favorite</span><span class="likes"> Le gusta a 10 personas</span>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque ad aut quis suscipit sit modi nostrum quas dolore. Quo repudiandae earum nostrum natus corrupti? Qui sunt veritatis magni laborum.</p>
+            <p><span class="material-symbols-outlined">mark_unread_chat_alt</span><span class="comments">5 comentarios...</span></p>
+            <p><span class="material-symbols-outlined">calendar_month</span><span class="datetime">22/09/2023</span></p>
         </section>
         <section class="post">
             <img src="https://loremflickr.com/400/600" alt="Imagen 2">
@@ -92,11 +95,13 @@
         <!-- Agrega más secciones de "post" según sea necesario -->
     </main>
     <footer>
-        <span class="material-symbols-outlined">search</span>
-        <span class="material-symbols-outlined">home</span>
-        <span class="material-symbols-outlined">add_circle</span>
-        <span class="material-symbols-outlined">movie</span>
-        <span class="material-symbols-outlined">face</span>
+        <span class="material-symbols-outlined" id="iconSearch">search</span>
+        <span class="material-symbols-outlined" id="iconHome">home</span>
+        <span class="material-symbols-outlined" id="iconAdd">add_circle</span>
+        <span class="material-symbols-outlined" id="iconVideo">movie</span>
+        <span class="material-symbols-outlined" id="iconUser">face</span>
     </footer>
+
+    <script src="index.js"></script>
 </body>
 </html>
