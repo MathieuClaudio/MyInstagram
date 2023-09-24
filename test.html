@@ -18,8 +18,10 @@
                         const notificacion = new Notification('Ejemplo de Notificación', {
                             body: 'Este es un mensaje de ejemplo.',
                         });
+                        alert('Notificaciónes: ' + permission);
                     }
                 });
+                alert('Notificaciónes in window OK');
             } else {
                 alert('Las notificaciones no son compatibles en este navegador.');
             }
