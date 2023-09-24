@@ -1,8 +1,11 @@
 "use strict";
 
 // ### constantes ###
-// Para manipular la sección de los article posts
-const sectionPosts = document.querySelector("#posts");
+
+// URL api
+const URL = "https://6510958d3ce5d181df5d6267.mockapi.io/api/v1/posts";
+// para los posts
+const arrayPost = [];
 // para cuando no hay post
 const postEmpty = [
     {
@@ -14,11 +17,27 @@ const postEmpty = [
      "date": ""
     }
 ]
+// Para manipular la sección de los article posts
+const sectionPosts = document.querySelector("#posts");
+// Opciones para el formato de fecha en español
+const opciones = {
+    year: 'numeric',
+    month: 'long', // muestro el nombre completo del mes
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    weekday: 'long', // muestro el nombre completo del día
+  };
+// Crear el formateador de fecha en español
+const formateador = new Intl.DateTimeFormat('es-ES', opciones);
+
+
+
+
 
 
 // ### Variables globales ###
-// para los posts
-let arrayPost = [];
+
 
 
 
@@ -63,43 +82,61 @@ iconUser.addEventListener("click", ()=> {
 
 
 
+
 // ### Metodos ###
+
+// Método para obtener todos los posts
 function getPosts(){
-    let divPost;
-    if(arrayPost.length == 0){
-        for (const post in postEmpty) {
-            if (postEmpty.hasOwnProperty(post)) {
-                const element = postEmpty[post];
-                divPost = document.createElement("article");
-                divPost.classList.add("post");
-                divPost.innerHTML = `
-                    <p>${element.title}</p>
-                    <img src="${element.imagen}" alt="Imagen ${post.length}">
-                    <p>Utiliza el botón <span class="material-symbols-outlined" id="iconAdd">add_circle</span> para agregar tu primer post</p>
-                `;
-                sectionPosts.appendChild(divPost);
-            }
-        } 
-    }else{
-        for (const post in arrayPost) {
-            if (arrayPost.hasOwnProperty(post)) {
-                const element = arrayPost[post];
-                divPost = document.createElement("article");
-                divPost.classList.add("post");
-                divPost.innerHTML = `
-                    <p>${element.title}</p>
-                    <img src="${element.imagen}" alt="Imagen ${post.length}">
-                    <span class="material-symbols-outlined">favorite</span><span class="likes"> Le gusta a ${element.countFavorite} personas</span>
-                    <p><span class="material-symbols-outlined">mark_unread_chat_alt</span><span class="comments">${element.countComment} comentarios...</span></p>
-                    <p><span class="material-symbols-outlined">calendar_month</span><span class="datetime">${element.date}</span></p>
-                    <button type="button" id="${element.id}" class="btn btn-danger bt-sm borrar">Borrar</button>
-                    <button type="button" id="${element.id}" class="btn btn-info bt-sm editar">Editar</button>
-                    <hr>
-                `;
-                sectionPosts.appendChild(divPost);
-            }
-        } 
-    }
+    fetch(URL)
+    // Obtengo los datos
+    .then((response)=> response.json())
+    // Agrego los datos obtenidos a arrayPost
+    .then((datos)=> arrayPost.push(...datos)) //SPREAD OPERATOR
+    .then(()=> {
+        let divPost;
+        if(arrayPost.length == 0){
+            for (const post in postEmpty) {
+                if (postEmpty.hasOwnProperty(post)) {
+                    const element = postEmpty[post];
+                    divPost = document.createElement("article");
+                    divPost.classList.add("post");
+                    divPost.innerHTML = `
+                        <p>${element.title}</p>
+                        <img src="${element.imagen}" alt="Imagen ${post.length}">
+                        <p>Utiliza el botón <span class="material-symbols-outlined" id="iconAdd">add_circle</span> para agregar tu primer post</p>
+                    `;
+                    sectionPosts.appendChild(divPost);
+                }
+            } 
+        }else{
+            for (const post in arrayPost) {
+                if (arrayPost.hasOwnProperty(post)) {
+                    const element = arrayPost[post];
+                    divPost = document.createElement("article");
+                    divPost.classList.add("post");
+
+                    // Trabajando con la fecha
+                    const fecha = new Date(element.date * 1000); // Multiplicamos por 1000 para convertir segundos en milisegundos
+                    const fechaFormateada = formateador.format(fecha);
+
+                    divPost.innerHTML = `
+                        <p>${element.title}</p>
+                        <img src="${element.imagen}" alt="Imagen ${post.length}">
+                        <span class="material-symbols-outlined">favorite</span><span class="likes"> Le gusta a ${element.countFavorite} personas</span>
+                        <p><span class="material-symbols-outlined">mark_unread_chat_alt</span><span class="comments">${element.countComment} comentarios...</span></p>
+                        <p><span class="material-symbols-outlined">calendar_month</span><span class="datetime">${fechaFormateada}</span></p>
+                        <button type="button" id="${element.id}" class="btn btn-danger bt-sm borrar">Borrar</button>
+                        <button type="button" id="${element.id}" class="btn btn-info bt-sm editar">Editar</button>
+                        <hr>
+                    `;
+                    sectionPosts.appendChild(divPost);
+                }
+            } 
+        }
+    })
+    //.then(()=> console.table(arrayPost))
+    .catch((error)=> console.error("Se ha producido un error:", error))
+
 }
 
 
@@ -112,7 +149,7 @@ function getPosts(){
 //      "imagen": "https://picsum.photos/400/600",
 //      "countFavorite": 4000,
 //      "countComment": 154,
-//      "date": "22/09/2023"
+//      "date": 1695586079
 //     },
 //     {
 //      "id": "2",
@@ -120,7 +157,15 @@ function getPosts(){
 //      "imagen": "https://loremflickr.com/400/600",
 //      "countFavorite": 150,
 //      "countComment": 5,
-//      "date": "20/09/2023"
+//      "date": 1700512500
 //     }
 // ]
+
+
+
+
+
+
 getPosts();
+
+
