@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,11 @@
     <!-- Fuente para la Marca MyInstagram -- https://fonts.google.com/specimen/Satisfy?preview.text=MyInstagram&preview.text_type=custom -->
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
     <!-- para los iconos -- https://fonts.google.com/icons?hl=es-419&selected=Material+Symbols+Outlined:mark_unread_chat_alt:FILL@0;wght@400;GRAD@0;opsz@24 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>MyInstagram</title>
 </head>
+
 <body>
     <header>
         <h1 class="brand">MyInstagram</h1>
@@ -17,6 +20,7 @@
         <span class="material-symbols-outlined" id="iconFavorite">favorite</span>
     </header>
     <main>
+        <!-- Sección para las historias de usuarios suiguiendo-->
         <div class="stories-container">
             <div class="story">
                 <div class="gradient-border">
@@ -80,19 +84,8 @@
             </div>
         </div>
 
-        <!-- http://via.placeholder.com/400x600 para sin imagen-->
-        <section class="post">
-            <img src="https://picsum.photos/400/600" alt="Imagen 1">
-            <span class="material-symbols-outlined">favorite</span><span class="likes"> Le gusta a 10 personas</span>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque ad aut quis suscipit sit modi nostrum quas dolore. Quo repudiandae earum nostrum natus corrupti? Qui sunt veritatis magni laborum.</p>
-            <p><span class="material-symbols-outlined">mark_unread_chat_alt</span><span class="comments">5 comentarios...</span></p>
-            <p><span class="material-symbols-outlined">calendar_month</span><span class="datetime">22/09/2023</span></p>
-        </section>
-        <section class="post">
-            <img src="https://loremflickr.com/400/600" alt="Imagen 2">
-            <p>Descripción de la imagen del post 2.</p>
-        </section>
-        <!-- Agrega más secciones de "post" según sea necesario -->
+        <!-- Sección para los post-->
+        <section id="posts"></section>
     </main>
     <footer>
         <span class="material-symbols-outlined" id="iconSearch">search</span>
@@ -102,6 +95,7 @@
         <span class="material-symbols-outlined" id="iconUser">face</span>
     </footer>
 
-    <script src="index.js"></script>
+    <script src="post.js"></script>
 </body>
+
 </html>

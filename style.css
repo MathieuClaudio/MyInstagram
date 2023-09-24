@@ -44,6 +44,10 @@ main {
     padding: 10px;
 }
 
+section#posts {
+    padding-bottom: 40px;
+}
+
 .stories-container {
     width: 90vw;
     display: flex;
