@@ -140,7 +140,15 @@ function getPosts() {
 }
 
 
-
+// Función para obtener la ruta de la imagen según el entorno
+function obtenerRutaImagen() {
+    // Verificar si estamos en localhost
+    if (window.location.hostname === "agenda.local" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        return "/myinstagram/img/logo.png";
+    } else {
+        return "https://ruta-del-dominio-real.com/myinstagram/img/logo.png"; 
+    }
+}
 
 // Función para mostrar una notificación
 function mostrarNotificacion(title , notify) {
@@ -148,11 +156,11 @@ function mostrarNotificacion(title , notify) {
         Notification.requestPermission().then(function (permission) {
             if (permission === 'granted') {
                 var body = notify;
-                var icon = "/myinstagram/img/logo.png";
+                var icon = "/myinstagram/img/logo.png"; // https://raw.githubusercontent.com/MathieuClaudio/MyInstagram/main/img/logo.png
                 var title = title;
                 var options = {
                     body: body,
-                    icon: icon,
+                    icon: obtenerRutaImagen(),
                     lang: "ES"
                 }
                 const notification = new Notification(title, options);
