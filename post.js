@@ -146,7 +146,7 @@ function obtenerRutaImagen() {
     if (window.location.hostname === "agenda.local" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
         return "/myinstagram/img/logo.png";
     } else {
-        return "https://ruta-del-dominio-real.com/myinstagram/img/logo.png"; 
+        return "https://raw.githubusercontent.com/MathieuClaudio/MyInstagram/main/img/logo.png"; 
     }
 }
 
