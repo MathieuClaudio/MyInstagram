@@ -156,11 +156,11 @@ function mostrarNotificacion(title , notify) {
         Notification.requestPermission().then(function (permission) {
             if (permission === 'granted') {
                 var body = notify;
-                var icon = "/myinstagram/img/logo.png"; // https://raw.githubusercontent.com/MathieuClaudio/MyInstagram/main/img/logo.png
+                var icon = obtenerRutaImagen();
                 var title = title;
                 var options = {
                     body: body,
-                    icon: obtenerRutaImagen(),
+                    icon: icon,
                     lang: "ES"
                 }
                 const notification = new Notification(title, options);
