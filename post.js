@@ -9,12 +9,12 @@ const arrayPost = [];
 // para cuando no hay post
 const postEmpty = [
     {
-     "id": "0",
-     "title": "Aún no has cargado ningún post",
-     "imagen": "http://via.placeholder.com/400x600",
-     "countFavorite": 0,
-     "countComment": 0,
-     "date": ""
+        "id": "0",
+        "title": "Aún no has cargado ningún post",
+        "imagen": "http://via.placeholder.com/400x600",
+        "countFavorite": 0,
+        "countComment": 0,
+        "date": ""
     }
 ]
 // Para manipular la sección de los article posts
@@ -27,7 +27,7 @@ const opciones = {
     hour: 'numeric',
     minute: 'numeric',
     weekday: 'long', // muestro el nombre completo del día
-  };
+};
 // Crear el formateador de fecha en español
 const formateador = new Intl.DateTimeFormat('es-ES', opciones);
 
@@ -47,34 +47,34 @@ const formateador = new Intl.DateTimeFormat('es-ES', opciones);
 // ### clicking ###
 // Aciones para la barra del header
 const iconComment = document.querySelector("#iconComment");
-iconComment.addEventListener("click", ()=> {
+iconComment.addEventListener("click", () => {
     alert("Agregar comentario...");
 });
 const iconFavorite = document.querySelector("#iconFavorite");
-iconFavorite.addEventListener("click", ()=> {
+iconFavorite.addEventListener("click", () => {
     alert("Marcar como favorito");
 });
 
 // Acciones de la barra deel footer
 const iconSearch = document.querySelector('#iconSearch');
-iconSearch.addEventListener("click", ()=> {
+iconSearch.addEventListener("click", () => {
     alert("Buscando...");
 });
 const iconHome = document.querySelector('#iconHome');
-iconHome.addEventListener("click", ()=> {
+iconHome.addEventListener("click", () => {
     window.location.reload();
 });
 const addPost = document.querySelector('#iconAdd');
-addPost.addEventListener("click", ()=> {
+addPost.addEventListener("click", () => {
     console.log("haciendo click");
     alert("Nuevo post...");
 });
 const iconVideo = document.querySelector('#iconVideo');
-iconVideo.addEventListener("click", ()=> {
+iconVideo.addEventListener("click", () => {
     alert("Nuevo video...");
 });
 const iconUser = document.querySelector('#iconUser');
-iconUser.addEventListener("click", ()=> {
+iconUser.addEventListener("click", () => {
     alert("Mi perfil...");
 });
 
@@ -86,40 +86,40 @@ iconUser.addEventListener("click", ()=> {
 // ### Metodos ###
 
 // Método para obtener todos los posts
-function getPosts(){
+function getPosts() {
     fetch(URL)
-    // Obtengo los datos
-    .then((response)=> response.json())
-    // Agrego los datos obtenidos a arrayPost
-    .then((datos)=> arrayPost.push(...datos)) //SPREAD OPERATOR
-    .then(()=> {
-        let divPost;
-        if(arrayPost.length == 0){
-            for (const post in postEmpty) {
-                if (postEmpty.hasOwnProperty(post)) {
-                    const element = postEmpty[post];
-                    divPost = document.createElement("article");
-                    divPost.classList.add("post");
-                    divPost.innerHTML = `
+        // Obtengo los datos
+        .then((response) => response.json())
+        // Agrego los datos obtenidos a arrayPost
+        .then((datos) => arrayPost.push(...datos)) //SPREAD OPERATOR
+        .then(() => {
+            let divPost;
+            if (arrayPost.length == 0) {
+                for (const post in postEmpty) {
+                    if (postEmpty.hasOwnProperty(post)) {
+                        const element = postEmpty[post];
+                        divPost = document.createElement("article");
+                        divPost.classList.add("post");
+                        divPost.innerHTML = `
                         <p>${element.title}</p>
                         <img src="${element.imagen}" alt="Imagen ${post.length}">
                         <p>Utiliza el botón <span class="material-symbols-outlined" id="iconAdd">add_circle</span> para agregar tu primer post</p>
                     `;
-                    sectionPosts.appendChild(divPost);
+                        sectionPosts.appendChild(divPost);
+                    }
                 }
-            } 
-        }else{
-            for (const post in arrayPost) {
-                if (arrayPost.hasOwnProperty(post)) {
-                    const element = arrayPost[post];
-                    divPost = document.createElement("article");
-                    divPost.classList.add("post");
+            } else {
+                for (const post in arrayPost) {
+                    if (arrayPost.hasOwnProperty(post)) {
+                        const element = arrayPost[post];
+                        divPost = document.createElement("article");
+                        divPost.classList.add("post");
 
-                    // Trabajando con la fecha
-                    const fecha = new Date(element.date * 1000); // Multiplicamos por 1000 para convertir segundos en milisegundos
-                    const fechaFormateada = formateador.format(fecha);
+                        // Trabajando con la fecha
+                        const fecha = new Date(element.date * 1000); // Multiplicamos por 1000 para convertir segundos en milisegundos
+                        const fechaFormateada = formateador.format(fecha);
 
-                    divPost.innerHTML = `
+                        divPost.innerHTML = `
                         <p>${element.title}</p>
                         <img src="${element.imagen}" alt="Imagen ${post.length}">
                         <span class="material-symbols-outlined">favorite</span><span class="likes"> Le gusta a ${element.countFavorite} personas</span>
@@ -129,16 +129,44 @@ function getPosts(){
                         <button type="button" id="${element.id}" class="btn btn-info bt-sm editar">Editar</button>
                         <hr>
                     `;
-                    sectionPosts.appendChild(divPost);
+                        sectionPosts.appendChild(divPost);
+                    }
                 }
-            } 
-        }
-    })
-    //.then(()=> console.table(arrayPost))
-    .catch((error)=> console.error("Se ha producido un error:", error))
+            }
+        })
+        //.then(()=> console.table(arrayPost))
+        .catch((error) => console.error("Se ha producido un error:", error))
 
 }
 
+
+
+
+// Función para mostrar una notificación
+function mostrarNotificacion(title , notify) {
+    if ('Notification' in window) {
+        Notification.requestPermission().then(function (permission) {
+            if (permission === 'granted') {
+                var body = notify;
+                var icon = "/myinstagram/img/logo.png";
+                var title = title;
+                var options = {
+                    body: body,
+                    icon: icon,
+                    lang: "ES"
+                }
+                const notification = new Notification(title, options);
+            }
+        });
+    } else {
+        alert('Las notificaciones no son compatibles en este navegador.');
+    }
+}
+
+
+
+
+// #########################################################################################
 
 
 // ### Entry Point ###
@@ -168,4 +196,6 @@ function getPosts(){
 
 getPosts();
 
-
+window.addEventListener("load", function(){
+    mostrarNotificacion("Notificación", "Ejemplo de notificación push con JS");
+})
