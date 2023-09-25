@@ -157,7 +157,6 @@ function mostrarNotificacion(title , notify) {
             if (permission === 'granted') {
                 var body = notify;
                 var icon = obtenerRutaImagen();
-                var title = title;
                 var options = {
                     body: body,
                     icon: icon,
