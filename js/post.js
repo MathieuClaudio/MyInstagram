@@ -14,7 +14,7 @@ const postEmpty = [
     {
         "id": "0",
         "title": "Aún no has cargado ningún post",
-        "imagen": "http://via.placeholder.com/400x600",
+        "imagen": "https://via.placeholder.com/400x600",
         "countFavorite": 0,
         "countComment": 0,
         "date": ""
