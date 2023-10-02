@@ -117,12 +117,15 @@ footer .material-symbols-outlined {
     text-decoration: none;
 }
   
+.material-symbols-outlined a:visited {
+    color: #00b7ff;
+}
+
 .material-symbols-outlined a:hover {
     color: #007bff;
 }
-
 .active {
-    color: #ff5733; 
+    color: #ff5733 !important; 
 }
 
 .capturar-foto label{

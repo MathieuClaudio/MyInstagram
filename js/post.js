@@ -61,7 +61,7 @@ function getPosts() {
                         divPost.innerHTML = `
                         <p>${element.title}</p>
                         <img src="${element.imagen}" alt="Imagen ${post.length}">
-                        <p>Utiliza el botón <span class="material-symbols-outlined" id="iconAdd">add_circle</span> para agregar tu primer post</p>
+                        <p>Utiliza el botón <span class="material-symbols-outlined" id="iconAdd"><a href="/MyInstagram/camara.html">add_circle</a></span> para agregar tu primer post</p>
                     `;
                         sectionPosts.appendChild(divPost);
                     }
