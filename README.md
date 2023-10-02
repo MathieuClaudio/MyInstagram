@@ -63,5 +63,14 @@ Estructura:
 
 En la carpeta "imagenes-ejemplo", hay imágenes para usar si se prueba desde una PC.
 
+## Imagen de index.html sin post cargados
+![estructura Mockapi](/img/indexHTML.jpeg)
+
+## Imagen de camara.html sin imagen ni título
+![estructura Mockapi](/img/camaraHTML.jpeg)
+
+## Imagen de camara.html con imagen y título
+![estructura Mockapi](/img/camaraHTMLconFoto.jpeg)
+
 
 
