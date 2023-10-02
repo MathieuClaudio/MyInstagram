@@ -84,20 +84,32 @@
                 <p>Username9</p>
             </div>
         </div>
-
-        <!-- Sección para los post-->
-        <section id="posts"></section>
+        
+        <!-- Sección para capturar imagenes-->
+        <div class="capturar-foto">
+            <div id="loading" style="display: none;">
+                <img src="img/loading1.gif" alt="Loading">
+                <p>Espere un momento...</p>
+            </div>            
+            <div id="notificaciones" class=""></div>
+            <button id="camara" class="btnCamara">Cámara</button>
+            <button id="btnPublicar" class="btnPublicar">Publicar</button>
+            <hr>
+            <label for="title">Título: </label>
+            <input type="text" name="title" id="title" placeholder="Ingresa un título para la imagen...">
+            <img src="http://via.placeholder.com/400x600" id="sinImagen" title="Imagen">
+        </div>
     </main>
     <footer>
         <span class="material-symbols-outlined" id="iconSearch">search</span>
-        <span class="material-symbols-outlined" id="iconHome"><a href="/MyInstagram/" class="active">home</a></span>
-        <span class="material-symbols-outlined" id="iconAdd"><a href="/myinstagram/camara.html">add_circle</a></span>
+        <span class="material-symbols-outlined" id="iconHome"><a href="/MyInstagram/">home</a></span>
+        <span class="material-symbols-outlined" id="iconAdd"><a href="/myinstagram/camara.html"  class="active">add_circle</a></span>
         <span class="material-symbols-outlined" id="iconVideo">movie</span>
         <span class="material-symbols-outlined" id="iconUser">face</span>
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/post.js"></script>
+    <script src="js/camara.js"></script>
 </body>
 
 </html>

@@ -1,11 +1,14 @@
 "use strict";
 
+// ##################
 // ### constantes ###
 
 // URL api
-const URL = "https://6510958d3ce5d181df5d6267.mockapi.io/api/v1/posts";
+const URLApi = "https://6510958d3ce5d181df5d6267.mockapi.io/api/v1/posts";
+
 // para los posts
 const arrayPost = [];
+
 // para cuando no hay post
 const postEmpty = [
     {
@@ -17,6 +20,7 @@ const postEmpty = [
         "date": ""
     }
 ]
+
 // Para manipular la sección de los article posts
 const sectionPosts = document.querySelector("#posts");
 // Opciones para el formato de fecha en español
@@ -32,66 +36,20 @@ const opciones = {
 const formateador = new Intl.DateTimeFormat('es-ES', opciones);
 
 
-
-
-
-
-// ### Variables globales ###
-
-
-
-
-
-
-
-// ### clicking ###
-// Aciones para la barra del header
-const iconComment = document.querySelector("#iconComment");
-iconComment.addEventListener("click", () => {
-    alert("Agregar comentario...");
-});
-const iconFavorite = document.querySelector("#iconFavorite");
-iconFavorite.addEventListener("click", () => {
-    alert("Marcar como favorito");
-});
-
-// Acciones de la barra deel footer
-const iconSearch = document.querySelector('#iconSearch');
-iconSearch.addEventListener("click", () => {
-    alert("Buscando...");
-});
-const iconHome = document.querySelector('#iconHome');
-iconHome.addEventListener("click", () => {
-    window.location.reload();
-});
-const addPost = document.querySelector('#iconAdd');
-addPost.addEventListener("click", () => {
-    console.log("haciendo click");
-    alert("Nuevo post...");
-});
-const iconVideo = document.querySelector('#iconVideo');
-iconVideo.addEventListener("click", () => {
-    alert("Nuevo video...");
-});
-const iconUser = document.querySelector('#iconUser');
-iconUser.addEventListener("click", () => {
-    alert("Mi perfil...");
-});
-
-
-
-
-
-
+// ###############
 // ### Metodos ###
 
-// Método para obtener todos los posts
+// Método para obtener todos los posts desde Mockapi.com
 function getPosts() {
-    fetch(URL)
+    fetch(URLApi)
         // Obtengo los datos
         .then((response) => response.json())
         // Agrego los datos obtenidos a arrayPost
-        .then((datos) => arrayPost.push(...datos)) //SPREAD OPERATOR
+        .then((datos) => {
+            arrayPost.push(...datos);
+            // Ordeno arrayPost en orden descendente
+            arrayPost.sort((a, b) => b.date - a.date);
+        }) //SPREAD OPERATOR
         .then(() => {
             let divPost;
             if (arrayPost.length == 0) {
@@ -121,7 +79,8 @@ function getPosts() {
 
                         divPost.innerHTML = `
                         <p>${element.title}</p>
-                        <img src="${element.imagen}" alt="Imagen ${post.length}">
+                        <img src="${element.imagen}" alt="Imagen ${post.length}" width="400">
+                        <br>
                         <span class="material-symbols-outlined">favorite</span><span class="likes"> Le gusta a ${element.countFavorite} personas</span>
                         <p><span class="material-symbols-outlined">mark_unread_chat_alt</span><span class="comments">${element.countComment} comentarios...</span></p>
                         <p><span class="material-symbols-outlined">calendar_month</span><span class="datetime">${fechaFormateada}</span></p>
@@ -143,6 +102,7 @@ function getPosts() {
 // Función para obtener la ruta de la imagen según el entorno
 function obtenerRutaImagen() {
     // Verificar si estamos en localhost
+    // agenda.local es un dominio que tengo configurado localmente como https para pruebas por eso está en este listado
     if (window.location.hostname === "agenda.local" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
         return "/myinstagram/img/logo.png";
     } else {
@@ -150,59 +110,8 @@ function obtenerRutaImagen() {
     }
 }
 
-// Función para mostrar una notificación
-function mostrarNotificacion(title , notify) {
-    if ('Notification' in window) {
-        Notification.requestPermission().then(function (permission) {
-            if (permission === 'granted') {
-                var body = notify;
-                var icon = obtenerRutaImagen();
-                var options = {
-                    body: body,
-                    icon: icon,
-                    lang: "ES"
-                }
-                const notification = new Notification(title, options);
-            }
-        });
-    } else {
-        alert('Las notificaciones no son compatibles en este navegador.');
-    }
-}
-
-
-
 
 // #########################################################################################
-
-
 // ### Entry Point ###
-// arrayPost = [
-//     {
-//      "id": "1",
-//      "title": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque ad aut.",
-//      "imagen": "https://picsum.photos/400/600",
-//      "countFavorite": 4000,
-//      "countComment": 154,
-//      "date": 1695586079
-//     },
-//     {
-//      "id": "2",
-//      "title": "Título 2",
-//      "imagen": "https://loremflickr.com/400/600",
-//      "countFavorite": 150,
-//      "countComment": 5,
-//      "date": 1700512500
-//     }
-// ]
-
-
-
-
-
 
 getPosts();
-
-window.addEventListener("load", function(){
-    mostrarNotificacion("Notificación", "Ejemplo de notificación push con JS");
-})
